@@ -1,0 +1,17 @@
+{% comment %}
+The `for` tag allows us to iterate over an array, which is what a collection
+actually is under the hood. Here, we're saying "For an item in a given
+collection, render out a `<div>` tag with its title, thumbnail, and a link to
+the page."
+{% endcomment %}
+{% for item in collection -%}
+  <div class="chapter">
+    {%# If `thumbnails` is true, display the page's thumbnail %}
+    {% if thumbnails -%}
+      <img src="{{ item.data.thumb }}" alt="Thumbnail for {{ item.data.title }}">
+    {%- endif %}
+    <h3>
+      <a href="{{ item.url }}">{{ item.data.title }}</a>
+    </h3>
+  </div>
+{%- endfor %}

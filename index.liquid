@@ -1,0 +1,28 @@
+---
+layout: layouts/base.liquid
+---
+{% comment %}
+This is a Liquid file, which extends HTML with templating functions! They're
+used similarly to the `comic_header.js` and `comic_footer.js` scripts in
+Rarebit, except that they can also take in data from 11ty's Data Cascade
+(https://www.11ty.dev/docs/data/). They're then compiled into regular HTML
+files by 11ty during the build process. For more on Liquid, see `strip.liquid`.
+
+Part of the data cascade includes collections, which are groups of pages
+specified by tags (https://www.11ty.dev/docs/collections/). You can specify
+individual collections to use within templates.
+{% endcomment %}{%# %}
+
+{%# If you want the first comic instead of the latest, set `last` to `first` %}
+{% assign latest = collections.comic | last %}
+<div class="comic">
+  <h1>{{ latest.data.title }}</h1>
+  {% render 'comic.liquid', collection: collections.comic, page: latest.page, images: latest.data.images, alt: latest.data.alt %}
+</div>
+{%# If we have author notes, include them %}
+{% unless latest.content == "" %}
+  <div class="authorNotes">
+    <h2>Author Notes</h2>
+    {{ latest.content }}
+  </div>
+{% endunless %}

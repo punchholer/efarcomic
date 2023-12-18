@@ -1,0 +1,30 @@
+{% comment %}
+Since we're needing to compare the current page to others within a given
+collection, we use the `assign` tag to declare variables within the Liquid
+template. Depending on the variable, we grab either the first/last items in a
+collection or the previous/current/next page in relation to a collection.
+(https://www.11ty.dev/docs/filters/collection-items/)
+
+We then use those variables to determine which navigation buttons to show; if
+we're on the first page of the comic, we don't need to show that button.
+{% endcomment %}
+{% assign current = collection | getCollectionItem: page %}
+{% assign first = collection | first %}
+{% assign previous = collection | getPreviousCollectionItem: page %}
+{% assign next = collection | getNextCollectionItem: page %}
+{% assign last = collection | last %}
+
+<div class="comicNav">
+  {% if current != first %}
+    <a href="{{ first.url }}#comicPage"><img src="/img/comicnav/nav_first.png" alt="First"></a>
+  {% endif %}
+  {% if previous %}
+    <a href="{{ previous.url }}#comicPage"><img src="/img/comicnav/nav_previous.png" alt="Previous"></a>
+  {% endif %}
+  {% if next %}
+    <a href="{{ next.url }}#comicPage"><img src="/img/comicnav/nav_next.png" alt="Next"></a>
+  {% endif %}
+  {% if current != last %}
+    <a href="{{ last.url }}#comicPage"><img src="/img/comicnav/nav_last.png" alt="Last"></a>
+  {% endif %}
+</div>

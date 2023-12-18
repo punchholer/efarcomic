@@ -1,0 +1,26 @@
+---
+layout: layouts/page.liquid
+title: Archive
+---
+<!--
+Writing sections of the archive involves including the `chapter.liquid` 
+component onto the page. Including it requires two variables...
+thumbnails: A boolean indicating whether you want thumbnails
+collection: The comic (chapter) collection you want to display; if you gave a
+page a tag in its front matter, that tag becomes a collection you can point to
+
+For more information on collections, see https://www.11ty.dev/docs/collections/
+--><h2>Chronological Order</h2>
+{% render 'chapter.liquid', thumbnails: true, collection: collections.comic %}
+<h2>"Latest First" Order</h2>
+{% render 'chapter.liquid', thumbnails: true, collection: collections.comic | reverse %}
+<h2>Or, divide it into chapters/arcs</h2>
+<h2>(You can also turn off thumbnails)</h2>
+<h2>Chapter 1</h2>
+{% render 'chapter.liquid', thumbnails: false, collection: collections.chapter1 %}
+<h2>Chapter 2</h2>
+{% render 'chapter.liquid', thumbnails: false, collection: collections.chapter2 %}
+<h2>Chapter 3</h2>
+{% render 'chapter.liquid', thumbnails: false, collection: collections.chapter3 %}
+<h2>Chapter 4</h2>
+{% render 'chapter.liquid', thumbnails: false, collection: collections.chapter4 %}
